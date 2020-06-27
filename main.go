@@ -27,18 +27,7 @@ func main() {
 		q1 := r.Question[0]
 		t := time.Now()
 
-		ns1 := fmt.Sprintf("ns1.%v.", *domain)
-		ns2 := fmt.Sprintf("ns2.%v.", *domain)
-		mainDomain := fmt.Sprintf("%v.", *domain)
-
-		blacklist := []string{ns1, ns2, mainDomain}
-		for _, item := range blacklist {
-			if strings.ToLower(q1.Name) == item {
-				return
-			}
-		}
-
-		if !dns.IsSubDomain(*domain+".", q1.Name) {
+		if !dns.IsSubDomain(*domain+".", q1.Name) || !strings.HasSuffix(q1.Name, "bb.ctoyan.com."){
 			return
 		}
 
